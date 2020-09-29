@@ -1,8 +1,7 @@
 // import { app, BrowserWindow, Menu, dialog } from 'electron'
-// import { productName, updateServer } from '../../package.json'
-// import { autoUpdater } from 'electron-updater'
+import { productName, updateServer } from '../../package.json'
+import { autoUpdater } from 'electron-updater'
 import { app, BrowserWindow, Menu } from 'electron'
-import { productName } from '../../package.json'
 
 // set app name
 app.setName(productName)
@@ -121,27 +120,29 @@ app.on('activate', () => {
  * support auto updating. Code Signing with a valid certificate is required.
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
-// const feed = `${updateServer}/update/${process.platform}_${process.arch}`
+const updateApp = 'jt808client';
+const updatePlatform = 'windows_64';
+const feed = `${updateServer}/update/${updateApp}/${updatePlatform}`
 
-// autoUpdater.setFeedURL(feed)
+autoUpdater.setFeedURL(feed)
 
-// autoUpdater.on('update-downloaded', () => {
-//   const dialogOpts = {
-//     type: 'info',
-//     buttons: ['更新', '稍后'],
-//     title: '应用程序更新',
-//     message: productName,
-//     detail: '一个新的版本已经下载完成，重新应用并应用更新。'
-//   }
+autoUpdater.on('update-downloaded', () => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['更新', '稍后'],
+    title: '应用程序更新',
+    message: productName,
+    detail: '一个新的版本已经下载完成，重新应用并应用更新。'
+  }
 
-//   dialog.showMessageBox(dialogOpts).then((returnValue) => {
-//     if (returnValue.response === 0) autoUpdater.quitAndInstall()
-//   })
-// })
-// 
-// app.on('ready', () => {
-//   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-// })
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+})
+
+app.on('ready', () => {
+  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
+})
 
 // const sendMenuEvent = async data => {
 //   mainWindow.webContents.send('change-view', data)
