@@ -14,11 +14,30 @@
 - 依次实现终端的位置汇报、事件报告、信息点播、数据上传等信息功能
 - 待基础与信息功能完成 发布 v1.0.0
 
-## 如何开发
+## 如何使用
+
+```bash
+# 克隆项目到本地
+git clone https://github.com/iov-pro/jt808-client.git
+# 进入工作目录
+cd jt808-client
+# 安装包管理工具
+npm install -g tyarn yarn
+# 安装依赖
+tyarn
+# 构建
+tyarn build
+# 开发
+tyarn dev
+```
 
 ## FAQ
 
+暂无
+
 ## 致谢
+
+暂无
 
 ## 授权
 
