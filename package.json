@@ -1,7 +1,7 @@
 {
   "author": "zhoyq <feedback@zhoyq.com>",
   "bugs": {
-    "url": "https://gitlab.zhoyq.com/services/protocol-related/jt808-client/issues"
+    "url": "https://github.com/iov-pro/jt808-client/issues"
   },
   "dependencies": {
     "bulma-pro": "^0.1.8",
@@ -14,7 +14,7 @@
     "vuex": "^3.1.2",
     "vuex-persistedstate": "^3.0.1"
   },
-  "description": "交通标准808虚拟终端",
+  "description": "中国交通标准808协议 虚拟终端",
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -59,15 +59,14 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "./dist/main.js",
   "name": "jt808-client",
-  "private": true,
   "productName": "交通标准808虚拟终端",
   "updateServer": "http://localhost:5000",
   "repository": {
     "type": "git",
-    "url": "ssh://git@gitlab.zhoyq.com:10022/services/protocol-related/jt808-client.git"
+    "url": "ssh://git@github.com/iov-pro/jt808-client.git"
   },
   "scripts": {
     "build": "run-s rebuild:electron pack build-release",

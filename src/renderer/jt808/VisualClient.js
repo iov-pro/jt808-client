@@ -3,6 +3,9 @@ import iconv from 'iconv-lite'
 import Utils from './Utils'
 import Handler from './Handler'
 
+const PROTOCOLS = [2011, 2013, 2019]
+let PROTOCOL_POS = 0
+
 export default class VisualClient {
     constructor () {
         this.ip = undefined
@@ -17,6 +20,7 @@ export default class VisualClient {
         this.socket = undefined
         this.heartbeatInterval = undefined
         this.handler = undefined
+        this.protocol = PROTOCOLS[PROTOCOL_POS]
     }
 
     init(vue) {
@@ -28,6 +32,11 @@ export default class VisualClient {
         this.log = vue.log
         this.error = vue.error
         this.handler = new Handler(this)
+    }
+
+    changeVersion() {
+        PROTOCOL_POS ++
+        this.protocol = PROTOCOLS[PROTOCOL_POS % 3]
     }
 
     storage() {
@@ -135,14 +144,15 @@ export default class VisualClient {
         const res = Utils.trans(Utils.addVerify(data))
         this.socket.write(Buffer.from(res))
     }
+
     // 终端鉴权
     terminalAuthorization() {
         this.log('终端鉴权...')
         let auth = this.getAuth()
         const phoneBytes = Buffer.from(this.phone, 'hex')
         // 如果没有鉴权码则尝试使用手机号后7位 鉴权
-        if (auth === undefined) {
-            auth = this.phone.substring(this.phone.length - 7)
+        if (auth === undefined || auth === null) {
+            auth = this.phone.substring(this.phone.length - 7).toString('hex')
             // 不设置存储到全局
             // this.setAuth(auth);
         }
@@ -156,6 +166,7 @@ export default class VisualClient {
         const res = Utils.trans(Utils.addVerify(data))
         this.socket.write(Buffer.from(res))
     }
+
     // 终端心跳
     terminalHeartBeat() {
         this.log('终端心跳...')
@@ -167,4 +178,28 @@ export default class VisualClient {
         const res = Utils.trans(Utils.addVerify(data))
         this.socket.write(Buffer.from(res))
     }
+
+    terminalCancel() {
+        this.log('终端注销...')
+        const phoneBytes = Buffer.from(this.phone, 'hex')
+        const data = []
+            .concat(0x00, 0x03, 0x00, 0x00)
+            .concat(...phoneBytes)
+            .concat(...Utils.terminalStream())
+        const res = Utils.trans(Utils.addVerify(data))
+        this.socket.write(Buffer.from(res))
+    }
+    terminalLocal() {}
+    terminalEvent() {}
+    terminalInfo() {}
+    terminalData() {}
+    terminalEl() {}
+    terminalDriver() {}
+    terminalBatchLocal() {}
+    terminalCanData() {}
+    terminalMedia() {}
+    terminalMediaData() {}
+    terminalTransport() {}
+    terminalCompress() {}
+    terminalRsa() {}
 }

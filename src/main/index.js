@@ -1,12 +1,11 @@
-// import { app, BrowserWindow, Menu, dialog } from 'electron'
+import { app, BrowserWindow, Menu, dialog } from 'electron'
 import { productName, updateServer } from '../../package.json'
 import { autoUpdater } from 'electron-updater'
-import { app, BrowserWindow, Menu } from 'electron'
 
-// set app name
+// 设置应用名称
 app.setName(productName)
 
-// disable electron warning
+// 禁用 electron 警告
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
 const gotTheLock = app.requestSingleInstanceLock()
@@ -144,102 +143,6 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
 
-// const sendMenuEvent = async data => {
-//   mainWindow.webContents.send('change-view', data)
-// }
-
-// const template = [
-//   {
-//     label: app.getName(),
-//     submenu: [
-//       {
-//         label: 'Home',
-//         accelerator: 'CommandOrControl+H',
-//         click() {
-//           sendMenuEvent({ route: '/' })
-//         },
-//       },
-//       { type: 'separator' },
-//       {
-//         label: '场景编辑器',
-//         accelerator: 'CommandOrControl+1',
-//         click() {
-//           sendMenuEvent({ route: '/scene' })
-//         },
-//       },
-//       {
-//         label: '材质编辑器',
-//         accelerator: 'CommandOrControl+2',
-//         click() {
-//           sendMenuEvent({ route: '/material' })
-//         },
-//       },
-//       {
-//         label: '后期编辑器',
-//         accelerator: 'CommandOrControl+3',
-//         click() {
-//           sendMenuEvent({ route: '/effect' })
-//         },
-//       },
-//       { type: 'separator' },
-//       { role: 'minimize' },
-//       { role: 'togglefullscreen' },
-//       { type: 'separator' },
-//       { role: 'quit', accelerator: 'Alt+F4' },
-//     ],
-//   },
-//   {
-//     role: 'help',
-//     submenu: [
-//       {
-//         label: 'Get Help',
-//         role: 'help',
-//         accelerator: 'F1',
-//         click() {
-//           sendMenuEvent({ route: '/help' })
-//         },
-//       },
-//       {
-//         label: 'About',
-//         role: 'about',
-//         accelerator: 'CommandOrControl+A',
-//         click() {
-//           sendMenuEvent({ route: '/about' })
-//         },
-//       },
-//     ],
-//   },
-// ]
-
 function setMenu() {
-  // if (process.platform === 'darwin') {
-  //   template.unshift({
-  //     label: app.getName(),
-  //     submenu: [
-  //       { role: 'about' },
-  //       { type: 'separator' },
-  //       { role: 'services' },
-  //       { type: 'separator' },
-  //       { role: 'hide' },
-  //       { role: 'hideothers' },
-  //       { role: 'unhide' },
-  //       { type: 'separator' },
-  //       { role: 'quit' },
-  //     ],
-  //   })
-
-  //   template.push({
-  //     role: 'window',
-  //   })
-
-  //   template.push({
-  //     role: 'help',
-  //   })
-
-  //   template.push({ role: 'services' })
-  // }
-
-  // const menu = Menu.buildFromTemplate(template)
-  // Menu.setApplicationMenu(menu)
   Menu.setApplicationMenu(null)
 }
