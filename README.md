@@ -31,6 +31,11 @@ tyarn build
 tyarn dev
 ```
 
+除了源码打包的方式还可以直接下载已经构建好的程序，当然目前仅发布 windows 版本。
+
+- 链接：[https://pan.baidu.com/s/1A2CD2Sy6pb50ILPuYO_kxA](https://pan.baidu.com/s/1A2CD2Sy6pb50ILPuYO_kxA) 
+- 提取码：`9vbg`
+
 ## FAQ
 
 暂无
